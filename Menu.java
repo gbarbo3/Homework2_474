@@ -12,7 +12,7 @@ public class Menu {
         return sc;
     }
 
-    public void insertPersonManual()
+    public void InsertPersonManual()
     {
         System.out.println("Enter First and Last Name:");
         sc = getScanner();
@@ -139,7 +139,7 @@ public class Menu {
     }
 
 
-    public void searchDirectory()
+    public void SearchDirectory()
     {
         System.out.println("Enter name to search:");
 
@@ -176,6 +176,68 @@ public class Menu {
         }
     }
 
+    public void CourseInfo()
+    {
+        System.out.println("Enter Course Name :");
+        sc = getScanner();
+
+        String line = sc.nextLine();
+        ArrayList<Instructor> instructors = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<>();
+        ArrayList<TA> tas = new ArrayList<>();
+
+        for (Person p : directory)
+        {
+            if(p instanceof Instructor)
+            {
+                for(Course c : ((Instructor) p).coursesTeaching)
+                {
+                    if(c.name.toUpperCase().contains(line.toUpperCase()))
+                    {
+                        instructors.add((Instructor) p);
+                        break;
+                    }
+
+                }
+            }
+            else if(p instanceof Student)
+            {
+                for(Course c : ((Student) p).coursesEnrolled)
+                {
+                    if(c.name.toUpperCase().contains(line.toUpperCase()))
+                    {
+                        students.add((Student) p);
+                        break;
+                    }
+                }
+            }
+            else if(p instanceof TA)
+            {
+                for(Course c : ((TA) p).coursesTeaching)
+                {
+                    if(c.name.toUpperCase().contains(line.toUpperCase()))
+                    {
+                        tas.add((TA) p);
+                        break;
+                    }
+                }
+            }
+
+        }
+        //Print Results
+        for(Instructor i : instructors)
+            System.out.println(i.firstName + " " + i.lastName);
+
+        for (TA t : tas)
+            System.out.println(t.firstName + " " + t.lastName);
+
+        for (Student s : students)
+            System.out.println(s.firstName + " " + s.lastName);
+
+
+
+    }
+
     public void print()
     {
         System.out.println("Enter selection");
@@ -201,14 +263,14 @@ public class Menu {
                 System.out.println("1");
                 break;
             case 2:
-                insertPersonManual();
+                InsertPersonManual();
                 break;
             case 3:
-                searchDirectory();
+                SearchDirectory();
 
                 break;
             case 4:
-                System.out.println("4");
+                CourseInfo();
 
                 break;
             case 5:
