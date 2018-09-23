@@ -138,6 +138,44 @@ public class Menu {
 
     }
 
+
+    public void searchDirectory()
+    {
+        System.out.println("Enter name to search:");
+
+        // no space search
+        sc  = getScanner();
+        String line = sc.nextLine();
+        String[] names = line.split(" ");
+
+        if(names.length == 1)
+        {
+            for (Person p : directory)
+            {
+                if(p.firstName.toUpperCase().contains(names[0].toUpperCase()) || p.firstName.toUpperCase().contains(names[0].toUpperCase()))
+                    System.out.println(p.firstName + " " + p.lastName);
+            }
+        }
+        //space search
+        else if(names.length == 2)
+        {
+            for(Person p : directory)
+            {
+                if(p.firstName.toUpperCase().contains(names[0].toUpperCase()))
+                    System.out.println(p.firstName + " " + p.lastName);
+
+                else if (p.lastName.toUpperCase().contains(names[1].toUpperCase()))
+                    System.out.println(p.firstName + " " + p.lastName);
+
+                else{}
+            }
+        }
+        else
+        {
+            System.out.println("No Results Found");
+        }
+    }
+
     public void print()
     {
         System.out.println("Enter selection");
@@ -163,11 +201,10 @@ public class Menu {
                 System.out.println("1");
                 break;
             case 2:
-
                 insertPersonManual();
                 break;
             case 3:
-                System.out.println("3");
+                searchDirectory();
 
                 break;
             case 4:
