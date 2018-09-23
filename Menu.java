@@ -238,6 +238,50 @@ public class Menu {
 
     }
 
+    public void ListCoursesWOInstructorAndAllCourseTaughtByInstructor()
+    {
+        //TODO
+        //Get all of Courses enrolled from Students and all of coursesTeaching from Instructors
+        // Filter into new list
+        //Print list
+
+        //Listing all Instructors with classes they are teaching
+        System.out.println("Listing all instructors and courses they are teaching:");
+        for(Person p : directory)
+        {
+            if(p instanceof Instructor)
+            {
+                System.out.print(p.firstName + " " +p.lastName + ": ");
+                for(Course c : ((Instructor) p).coursesTeaching)
+                    System.out.print(c.name + "| ");
+                System.out.println();
+            }
+        }
+    }
+
+    public void UpdatePayment()
+    {
+        System.out.println("Updating Payment");
+        for(Person p : directory)
+        {
+            if(p instanceof Instructor)
+            {
+                System.out.println("Instructor Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((Instructor) p).salary * ((Instructor) p).coursesTeaching.size());
+            }
+            else if(p instanceof TA)
+            {
+                System.out.println("TA Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((TA) p).salary * ((TA) p).hoursAssigned);
+            }
+            else if(p instanceof Staff)
+            {
+                System.out.println("Staff Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((Staff) p).salary);
+
+            }
+
+            System.out.println("Payments Updated...");
+        }
+    }
+
     public void print()
     {
         System.out.println("Enter selection");
@@ -267,19 +311,15 @@ public class Menu {
                 break;
             case 3:
                 SearchDirectory();
-
                 break;
             case 4:
                 CourseInfo();
-
                 break;
             case 5:
-                System.out.println("5");
-
+                ListCoursesWOInstructorAndAllCourseTaughtByInstructor();
                 break;
             case 6:
-                System.out.println("6");
-
+                UpdatePayment();
                 break;
             case 7:
                 System.out.println("7");
