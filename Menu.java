@@ -282,6 +282,86 @@ public class Menu {
         }
     }
 
+    public Person Search(String s)
+    {
+        return null;
+    }
+
+    public void SendEmail()
+    {
+        System.out.println("Enter full name of person sending the email:");
+        sc = getScanner();
+        String name = sc.nextLine();
+        String[] fullName = name.split(" ");
+
+        System.out.println("Enter emails to send to . Enter comma separated");
+        String line = sc.nextLine();
+        String[] emails = line.split(",");
+
+        String type = "null";
+        // search for person
+        for(Person p : directory)
+        {
+            if(p.firstName.toUpperCase().contains(fullName[0].toUpperCase()) &&
+                    p.lastName.toUpperCase().contains(fullName[1].toUpperCase()))
+            {
+                // get type
+                if(p instanceof Student){type = "Student";}
+                else if(p instanceof Instructor){type = "Instructor";}
+                else if(p instanceof TA){type = "TA";}
+                else if(p instanceof Staff){type = "Staff";}
+
+
+            }
+        }
+
+        if (type.equalsIgnoreCase("Student")){
+
+             for(String s : emails) {
+               Person p =  Search(s.trim());
+               if(p instanceof TA)
+                   System.out.println("Email was successfully sent to " + s);
+               else
+                   System.out.println("Email was  not successfully sent to " + s);
+             }
+
+        }
+        else if (type.equalsIgnoreCase("Instructor")){
+
+            for(String s : emails) {
+                Person p =  Search(s.trim());
+                if(p instanceof Instructor || p instanceof Staff)
+                    System.out.println("Email was successfully sent to " + s);
+                else
+                    System.out.println("Email was  not successfully sent to " + s);
+            }
+        }
+        else if(type.equalsIgnoreCase("TA")){
+
+            for(String s : emails) {
+                Person p =  Search(s.trim());
+                if(p instanceof Staff || p == null)
+                    System.out.println("Email was  not successfully sent to " + s);
+                else
+                    System.out.println("Email was successfully sent to " + s);
+            }
+        }
+        else if(type.equalsIgnoreCase("Staff")){
+
+            for(String s : emails) {
+                Person p =  Search(s.trim());
+                if(p instanceof Instructor || p == null)
+                    System.out.println("Email was  not successfully sent to " + s);
+                else
+                    System.out.println("Email was successfully sent to " + s);
+            }
+        }
+        else {
+            System.out.println("User was not found");
+        }
+
+    }
+
     public void print()
     {
         System.out.println("Enter selection");
@@ -322,8 +402,7 @@ public class Menu {
                 UpdatePayment();
                 break;
             case 7:
-                System.out.println("7");
-
+                SendEmail();
                 break;
             case 0:
                 System.out.println("0");
