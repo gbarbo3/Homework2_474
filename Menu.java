@@ -154,7 +154,7 @@ public class Menu {
         {
             for (Person p : directory)
             {
-                if(p.firstName.toUpperCase().contains(names[0].toUpperCase()) || p.firstName.toUpperCase().contains(names[0].toUpperCase()))
+                if(p.firstName.toUpperCase().contains(names[0].toUpperCase()) || p.lastName.toUpperCase().contains(names[0].toUpperCase()))
                     System.out.println(p.firstName + " " + p.lastName);
             }
         }
@@ -298,19 +298,21 @@ public class Menu {
         {
             if(p instanceof Instructor)
             {
-                System.out.println("Instructor Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((Instructor) p).salary * ((Instructor) p).coursesTeaching.size());
+                System.out.println("Instructor Payment to " + p.firstName + " " + p.lastName+ " of amount: " + ((Instructor) p).salary * ((Instructor) p).coursesTeaching.size());
+                System.out.println("Payments Updated...");
             }
             else if(p instanceof TA)
             {
-                System.out.println("TA Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((TA) p).salary * ((TA) p).hoursAssigned);
+                System.out.println("TA Payment to " + p.firstName + " " + p.lastName+ " of amount: " + ((TA) p).salary * ((TA) p).hoursAssigned);
+                System.out.println("Payments Updated...");
             }
             else if(p instanceof Staff)
             {
-                System.out.println("Staff Payment to " + p.firstName + " " + p.lastName+ "of amount: " + ((Staff) p).salary);
-
+                System.out.println("Staff Payment to " + p.firstName + " " + p.lastName+ " of amount: " + ((Staff) p).salary);
+                System.out.println("Payments Updated...");
             }
 
-            System.out.println("Payments Updated...");
+
         }
     }
 
