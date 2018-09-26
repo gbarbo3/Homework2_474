@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -244,6 +246,36 @@ public class Menu {
         //Get all of Courses enrolled from Students and all of coursesTeaching from Instructors
         // Filter into new list
         //Print list
+        ArrayList<String> studentClasses = new ArrayList<>();
+        ArrayList<String> instructorClasses = new ArrayList<>();
+
+        // put all classes into two arrays
+        for (Person p : directory){
+            if(p instanceof Student)
+            {
+                for (Course c : ((Student) p).coursesEnrolled)
+                {
+                    studentClasses.add(c.name);
+                }
+            }
+
+            else if ( p instanceof Instructor) {
+                for (Course c : ((Instructor) p).coursesTeaching)
+                {
+                    instructorClasses.add(c.name);
+                }
+            }
+        }
+
+        for(String s : instructorClasses)
+        {
+            studentClasses.removeIf(s1 -> (s1.equalsIgnoreCase(s)));
+
+        }
+        System.out.println("Listing of all courses that students are enrolled w/o instructor");
+
+        for(String s : studentClasses)
+            System.out.println(s);
 
         //Listing all Instructors with classes they are teaching
         System.out.println("Listing all instructors and courses they are teaching:");
@@ -284,6 +316,11 @@ public class Menu {
 
     public Person Search(String s)
     {
+        for (Person p : directory)
+        {
+            if(p.email.toUpperCase().contains(s.toUpperCase()) || p.email.toUpperCase().contains(s.toUpperCase()))
+               return p;
+        }
         return null;
     }
 
@@ -362,6 +399,28 @@ public class Menu {
 
     }
 
+    public void InsertWithCsv() throws FileNotFoundException
+    {
+   /*     Scanner sc = new Scanner(new File("test.csv"));
+
+        while(sc.hasNextLine())
+        {
+            String line = sc.nextLine();
+            String[] parts = line.split(",");
+
+            int id = Integer.parseInt(parts[0]);
+            String firstName = parts[1];
+            String lastName = parts[2];
+            String email = parts[3];
+            String role = parts[4];
+
+            if(role.equalsIgnoreCase("Student")){
+
+            }
+        }*/
+
+    }
+
     public void print()
     {
         System.out.println("Enter selection");
@@ -384,7 +443,7 @@ public class Menu {
         switch (choice)
         {
             case 1:
-                System.out.println("1");
+                //InsertWithCsv();
                 break;
             case 2:
                 InsertPersonManual();
